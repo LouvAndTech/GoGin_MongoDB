@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    # Link all the container port to the host ones so we can access them from other machines
+    ports:
+      - 8080:8080
+
+  db:
+    image: mongo:latest
+    restart: unless-stopped
+    volumes:
+      - mongodb-data:/data/db
+
+    # Uncomment to change startup options
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword_dev
+    # MONGO_INITDB_DATABASE: your-database-here
+
+    # Set the db container to be on the same network as the app container so they can talk to each other
+    network_mode: service:app
+
+
+volumes:
+  mongodb-data:

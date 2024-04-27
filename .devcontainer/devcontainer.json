@@ -1,0 +1,50 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go
+{
+	"name": "GoGin_MongoDb",
+	// Specified we will use docker-compose.yml as the dev container.
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"mongodb.mongodb-vscode",
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"hediet.vscode-drawio",
+				"mhutchie.git-graph",
+				"tomoki1207.pdf",
+				"Gruntfuggly.todo-tree",
+				"jinliming2.vscode-go-template",
+				"golang.go"
+			]
+		}
+	},
+	
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/go:1": {},
+		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {}
+		//"ghcr.io/devcontainers-contrib/features/mongosh-homebrew:1": {}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [8080,27017],
+	// Port List : 
+	// 8080 : Go Server
+	// 27017 : MongoDB
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "go version",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "root"
+}
